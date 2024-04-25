@@ -43,7 +43,7 @@ def generate_huffman_codes(node, code='', codes={}):
 def visualize_huffman_tree(root):
     G = nx.Graph()
     node_count = 0
-    G.add_node(node_count, label=root.char if root.char is not None else '')
+    G.add_node(node_count, label=root.char if root.char is not None else 'None')
     stack = [(root, 0, node_count)]
     pos = {node_count: (0, 0)}
 
@@ -51,13 +51,15 @@ def visualize_huffman_tree(root):
         node, depth, parent = stack.pop()
         if node.left:
             node_count += 1
-            G.add_node(node_count, label=node.left.char if node.left.char is not None else '')
+            label = node.left.char if node.left.char is not None else 'None'
+            G.add_node(node_count, label=label)
             G.add_edge(parent, node_count)
             stack.append((node.left, depth + 1, node_count))
             pos[node_count] = (depth + 1, -node_count)
         if node.right:
             node_count += 1
-            G.add_node(node_count, label=node.right.char if node.right.char is not None else '')
+            label = node.right.char if node.right.char is not None else 'None'
+            G.add_node(node_count, label=label)
             G.add_edge(parent, node_count)
             stack.append((node.right, depth + 1, node_count))
             pos[node_count] = (depth + 1, -node_count)
