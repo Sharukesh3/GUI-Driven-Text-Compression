@@ -43,7 +43,7 @@ def generate_huffman_codes(node, code='', codes={}):
 def visualize_huffman_tree(root):
     G = nx.Graph()
     node_count = 0
-    G.add_node(node_count, label=root.char if root.char is not None else 'None')
+    G.add_node(node_count, label=f"{root.char}\n{root.freq}" if root.char is not None else root.freq)
     stack = [(root, 0, node_count)]
     pos = {node_count: (0, 0)}
 
@@ -51,18 +51,18 @@ def visualize_huffman_tree(root):
         node, depth, parent = stack.pop()
         if node.left:
             node_count += 1
-            label = node.left.char if node.left.char is not None else 'None'
+            label = f"{node.left.char}\n{node.left.freq}" if node.left.char is not None else node.left.freq
             G.add_node(node_count, label=label)
             G.add_edge(parent, node_count)
             stack.append((node.left, depth + 1, node_count))
-            pos[node_count] = (depth + 1, -node_count)
+            pos[node_count] = (depth * 2, -node_count)
         if node.right:
             node_count += 1
-            label = node.right.char if node.right.char is not None else 'None'
+            label = f"{node.right.char}\n{node.right.freq}" if node.right.char is not None else node.right.freq
             G.add_node(node_count, label=label)
             G.add_edge(parent, node_count)
             stack.append((node.right, depth + 1, node_count))
-            pos[node_count] = (depth + 1, -node_count)
+            pos[node_count] = (depth * 2 + 1, -node_count)
 
     labels = nx.get_node_attributes(G, 'label')
     nx.draw(G, pos=pos, labels=labels, with_labels=True, node_size=2000, node_color='skyblue', font_size=10)
