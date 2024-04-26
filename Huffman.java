@@ -7,7 +7,7 @@ import java.util.*;
 public class Huffman {
     private Node root;
     private final String text;
-    private Map<Character, Integer> charFrequencies;
+    private Map<Character, Integer> charFrequencies; // A dictionary like datatype containing Character integer pairs.
     private final Map<Character, String> huffmanCodes;
 
     public Huffman(String text) {
