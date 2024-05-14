@@ -64,13 +64,17 @@ def visualize_huffman_tree(root):
     plt.show()
 
 def main():
-    text = "dskjfdsjkfhjdskfkjdsfkjsdfkjh"
+    text = input()
     root = build_huffman_tree(text)
+    
+    '''
     codes = generate_huffman_codes(root)
     print("Huffman Codes:")
     for char, code in sorted(codes.items()):
         print(f"{char}: {code}")
+    '''
     visualize_huffman_tree(root)
+    
 
 if __name__ == "__main__":
     main()

@@ -1,33 +1,34 @@
 public class Main {
     public static void main(String[] args) {
+        String inpString = "sadkljfijlawfkjlasdfsdkhfasdkhfgasdjgfadshfjasdfjhsdfj";
         System.out.println("Huffman coding:");
 
-        Huffman huffman = new Huffman("sadkljfijlawfkjlasdfsdkhfasdkhfgasdjgfadshfjasdfjhsdfj");
+        Huffman huffman = new Huffman(inpString);
         String encodedText = huffman.encode();
         System.out.println("\nThe encoded text is :");
         System.out.println(encodedText);
-        System.out.println("\nThe following are the code for each letter: ");
 
+        System.out.println("\nThe following are the code for each letter: ");
         huffman.printCodes();
 
         String originalText = huffman.decode(encodedText);
         System.out.println("\nThe decoded text: ");
         System.out.println(originalText);
 
-        System.out.println("Tree visualisation");
-        python python = new python();
+        System.out.println("\nTree visualisation");
+        python python = new python(inpString);
         python.Huffman_tree_visualisation();
-        
+
         CompressionRatio ratio = new CompressionRatio(8*originalText.length(),encodedText.length());
         Double R=ratio.calculateRatio();
         System.out.println("\nThe compression ratio: ");
         System.out.println(R);
 
-        System.out.println("LZ77 encoding");
-        LZ77 LZ77 = new LZ77("cabracadabrarrarrad",10,5);
+        System.out.println("\n\nLZ77 encoding:");
+        LZ77 LZ77 = new LZ77(inpString,10,5);
         System.out.println("\nThe encoded text is :");
-        System.out.println("Compressed data: " + LZ77.getcompressedData());
+        System.out.println(LZ77.getcompressedData());
         System.out.println("\nThe decoded text: ");
-        System.out.println("Decoded data: " + LZ77.getdecodedData());
+        System.out.println(LZ77.getdecodedData());
     }
 }
