@@ -19,7 +19,7 @@ public class FileChooserExample extends JFrame {
 
     public FileChooserExample() {
         setTitle("File Chooser Example");
-        setSize(600, 400);
+        setSize(800, 400); // Adjusted size for better visibility
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -27,9 +27,9 @@ public class FileChooserExample extends JFrame {
         fileNameLabel = new JLabel("Selected File: ");
         inputTextArea = new JTextArea();
         outputTextArea = new JTextArea();
+        outputTextArea.setLineWrap(true); // Enable line wrapping for outputTextArea
+        outputTextArea.setWrapStyleWord(true); // Wrap at word boundaries
         outputTextArea.setEditable(false);
-        outputTextArea.setLineWrap(true);
-        outputTextArea.setWrapStyleWord(true);
         
         // ComboBox options
         String[] algorithms = {"Choose an algorithm", "Huffman", "LZ77", "LZW"};
@@ -72,7 +72,8 @@ public class FileChooserExample extends JFrame {
         });
 
         JPanel topPanel = new JPanel(new BorderLayout());
-        topPanel.add(fileNameLabel, BorderLayout.NORTH);
+        topPanel.add(fileNameLabel, BorderLayout.WEST); // Place label on the left
+        topPanel.add(chooseFileButton, BorderLayout.EAST); // Place button on the right
         
         JPanel inputPanel = new JPanel(new BorderLayout());
         inputPanel.add(new JScrollPane(inputTextArea), BorderLayout.CENTER);
@@ -86,26 +87,22 @@ public class FileChooserExample extends JFrame {
         algorithmPanel.add(algorithmComboBox);
         
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        buttonPanel.add(chooseFileButton);
+        buttonPanel.add(compressButton);
         
-        JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.add(topPanel, BorderLayout.NORTH);
-        mainPanel.add(inputPanel, BorderLayout.WEST);
-        mainPanel.add(outputPanel, BorderLayout.EAST);
-        mainPanel.add(algorithmPanel, BorderLayout.SOUTH);
-        
-        // Adding separator between input and output
-        mainPanel.add(new JSeparator(SwingConstants.VERTICAL), BorderLayout.CENTER);
+        JPanel mainPanel = new JPanel(new GridLayout(1, 2)); // Split into two columns
+        mainPanel.add(inputPanel);
+        mainPanel.add(outputPanel);
 
-        // Adding both button and dropdown panels to the bottom
-        JPanel bottomButtonPanel = new JPanel(new BorderLayout());
-        bottomButtonPanel.add(buttonPanel, BorderLayout.WEST);
-        bottomButtonPanel.add(compressButton, BorderLayout.EAST);
-        bottomButtonPanel.add(algorithmPanel, BorderLayout.CENTER);
-        mainPanel.add(bottomButtonPanel, BorderLayout.SOUTH);
+        JPanel bottomPanel = new JPanel(new BorderLayout());
+        bottomPanel.add(algorithmPanel, BorderLayout.CENTER);
+        bottomPanel.add(buttonPanel, BorderLayout.EAST); // Adjusted placement of compress button
 
-        // Adding main panel to the frame
-        add(mainPanel);
+        JPanel containerPanel = new JPanel(new BorderLayout());
+        containerPanel.add(topPanel, BorderLayout.NORTH);
+        containerPanel.add(mainPanel, BorderLayout.CENTER);
+        containerPanel.add(bottomPanel, BorderLayout.SOUTH);
+
+        add(containerPanel);
     }
 
     // Read contents of a file and return as a single string
@@ -130,7 +127,7 @@ public class FileChooserExample extends JFrame {
             outputTextArea.setText(compresser.getCompressed());
         }
         else if (algorithm.equals("LZ77")){
-            outputTextArea.setText(compresser.getCompressed());
+            outputTextArea.setText(compresser.getCompressedLZ77().toString());
         }
     }
 
