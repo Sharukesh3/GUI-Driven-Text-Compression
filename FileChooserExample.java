@@ -4,8 +4,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileChooserExample extends JFrame {
@@ -16,6 +18,7 @@ public class FileChooserExample extends JFrame {
     private JComboBox<String> algorithmComboBox;
     private JButton compressButton;
     private StringBuilder fileContent = new StringBuilder();
+    private String compressedContent;
 
     public FileChooserExample() {
         setTitle("File Chooser Example");
@@ -119,17 +122,46 @@ public class FileChooserExample extends JFrame {
         return fileContent.toString();
     }
 
-    // Dummy compress function
     private void compress(String algorithm) {
-        // You can replace this with your actual compression logic
+
         JOptionPane.showMessageDialog(null, "Compressing file using " + algorithm);
         compression compresser = new compression(algorithm, inputTextArea.getText());
         if (algorithm.equals("Huffman") || algorithm.equals("LZW")){
+            compressedContent = compresser.getCompressed();
             outputTextArea.setText(compresser.getCompressed());
         }
         else if (algorithm.equals("LZ77")){
+            compressedContent = compresser.getCompressedLZ77().toString();
             outputTextArea.setText(compresser.getCompressedLZ77().toString());
         }
+        else {
+            JOptionPane.showMessageDialog(null, "Invalid compression algorithm.");
+            return;
+        }
+        // Fixed path to save the compressed file
+    String fixedPath = "C:\\familyfolders\\profolders\\Collage stuff\\Sem 2 project\\DSA\\output_files\\output.txt";
+
+    try {
+        // Create a new file
+        File outputFile = new File(fixedPath);
+        if (!outputFile.exists()) {
+            if (outputFile.createNewFile()) {
+                JOptionPane.showMessageDialog(null, "File created successfully at: " + outputFile.getAbsolutePath());
+            } else {
+                JOptionPane.showMessageDialog(null, "Failed to create the file at the specified location.");
+                return;
+            }
+        }
+
+        // Write the compressed content to the file
+        FileWriter writer = new FileWriter(outputFile);
+        writer.write(compressedContent);
+        writer.close();
+
+    } catch (IOException e) {
+        JOptionPane.showMessageDialog(null, "An error occurred while writing to the file.");
+        e.printStackTrace();
+    }
     }
 
     public static void main(String[] args) {
