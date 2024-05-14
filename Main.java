@@ -27,7 +27,7 @@ public class Main {
         System.out.println(R);
 
         System.out.println("\n\nLZ77 encoding:");
-        LZ77 LZ77 = new LZ77(inpString,10,7);
+        LZ77 LZ77 = new LZ77(inpString,10,5);
         System.out.println("\nThe encoded text is :");
         System.out.println(LZ77.getcompressedData());
         System.out.println("\nThe decoded text: ");
