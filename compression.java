@@ -18,7 +18,6 @@ public class compression {
         else{
             this.getCompressed();
         }
-        System.out.println(compressed);
     }
 
     private void HuffmanEncoding(String content){

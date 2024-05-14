@@ -14,7 +14,7 @@ public class FileChooserExample extends JFrame {
     private JTextArea outputTextArea;
     private JComboBox<String> algorithmComboBox;
     private JButton compressButton;
-    StringBuilder fileContent = new StringBuilder();
+    private StringBuilder fileContent = new StringBuilder();
 
     public FileChooserExample() {
         setTitle("File Chooser Example");
@@ -59,8 +59,9 @@ public class FileChooserExample extends JFrame {
                     fileNameLabel.setText("Selected File: " + selectedFile.getName());
                     
                     // Read file contents and display in the text area
-                    String fileContent = readFile(selectedFile);
-                    outputTextArea.setText(fileContent);
+                    fileContent.setLength(0); // Clear existing content
+                    String content = readFile(selectedFile);
+                    outputTextArea.setText(content);
                 }
             }
         });
@@ -106,8 +107,13 @@ public class FileChooserExample extends JFrame {
     private void compress(String algorithm) {
         // You can replace this with your actual compression logic
         JOptionPane.showMessageDialog(null, "Compressing file using " + algorithm);
-        compression compresser = new compression(algorithm,fileContent.toString());
-        System.out.println(compresser.getCompressed());
+        compression compresser = new compression(algorithm, fileContent.toString());
+        if (algorithm.equals("Huffman") || algorithm.equals("LZW")){
+            System.out.println(compresser.getCompressed());
+        }
+        else if (algorithm == "LZ77"){
+            System.out.println(compresser.getCompressedLZ77());
+        }
     }
 
     public static void main(String[] args) {
