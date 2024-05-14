@@ -11,6 +11,7 @@ import java.io.IOException;
 public class FileChooserExample extends JFrame {
     private JButton chooseFileButton;
     private JLabel fileNameLabel;
+    private JTextArea inputTextArea;
     private JTextArea outputTextArea;
     private JComboBox<String> algorithmComboBox;
     private JButton compressButton;
@@ -18,13 +19,17 @@ public class FileChooserExample extends JFrame {
 
     public FileChooserExample() {
         setTitle("File Chooser Example");
-        setSize(400, 350);
+        setSize(600, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         chooseFileButton = new JButton("Choose File");
         fileNameLabel = new JLabel("Selected File: ");
+        inputTextArea = new JTextArea();
         outputTextArea = new JTextArea();
+        outputTextArea.setEditable(false);
+        outputTextArea.setLineWrap(true);
+        outputTextArea.setWrapStyleWord(true);
         
         // ComboBox options
         String[] algorithms = {"Choose an algorithm", "Huffman", "LZ77", "LZW"};
@@ -58,10 +63,10 @@ public class FileChooserExample extends JFrame {
                     File selectedFile = fileChooser.getSelectedFile();
                     fileNameLabel.setText("Selected File: " + selectedFile.getName());
                     
-                    // Read file contents and display in the text area
+                    // Read file contents and display in the input text area
                     fileContent.setLength(0); // Clear existing content
                     String content = readFile(selectedFile);
-                    outputTextArea.setText(content);
+                    inputTextArea.setText(content);
                 }
             }
         });
@@ -69,24 +74,37 @@ public class FileChooserExample extends JFrame {
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.add(fileNameLabel, BorderLayout.NORTH);
         
-        JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        bottomPanel.add(algorithmComboBox);
+        JPanel inputPanel = new JPanel(new BorderLayout());
+        inputPanel.add(new JScrollPane(inputTextArea), BorderLayout.CENTER);
+        inputPanel.setBorder(BorderFactory.createTitledBorder("Input"));
+        
+        JPanel outputPanel = new JPanel(new BorderLayout());
+        outputPanel.add(new JScrollPane(outputTextArea), BorderLayout.CENTER);
+        outputPanel.setBorder(BorderFactory.createTitledBorder("Output"));
+
+        JPanel algorithmPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        algorithmPanel.add(algorithmComboBox);
         
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         buttonPanel.add(chooseFileButton);
         
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.add(topPanel, BorderLayout.NORTH);
-        mainPanel.add(new JScrollPane(outputTextArea), BorderLayout.CENTER);
-        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+        mainPanel.add(inputPanel, BorderLayout.WEST);
+        mainPanel.add(outputPanel, BorderLayout.EAST);
+        mainPanel.add(algorithmPanel, BorderLayout.SOUTH);
         
+        // Adding separator between input and output
+        mainPanel.add(new JSeparator(SwingConstants.VERTICAL), BorderLayout.CENTER);
+
         // Adding both button and dropdown panels to the bottom
         JPanel bottomButtonPanel = new JPanel(new BorderLayout());
         bottomButtonPanel.add(buttonPanel, BorderLayout.WEST);
         bottomButtonPanel.add(compressButton, BorderLayout.EAST);
-        bottomButtonPanel.add(bottomPanel, BorderLayout.CENTER);
+        bottomButtonPanel.add(algorithmPanel, BorderLayout.CENTER);
         mainPanel.add(bottomButtonPanel, BorderLayout.SOUTH);
 
+        // Adding main panel to the frame
         add(mainPanel);
     }
 
@@ -107,12 +125,12 @@ public class FileChooserExample extends JFrame {
     private void compress(String algorithm) {
         // You can replace this with your actual compression logic
         JOptionPane.showMessageDialog(null, "Compressing file using " + algorithm);
-        compression compresser = new compression(algorithm, fileContent.toString());
+        compression compresser = new compression(algorithm, inputTextArea.getText());
         if (algorithm.equals("Huffman") || algorithm.equals("LZW")){
-            System.out.println(compresser.getCompressed());
+            outputTextArea.setText(compresser.getCompressed());
         }
-        else if (algorithm == "LZ77"){
-            System.out.println(compresser.getCompressedLZ77());
+        else if (algorithm.equals("LZ77")){
+            outputTextArea.setText(compresser.getCompressed());
         }
     }
 
