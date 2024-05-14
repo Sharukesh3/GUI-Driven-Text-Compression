@@ -95,6 +95,7 @@ public class FileChooserExample extends JFrame {
 
         JPanel bottomPanel = new JPanel(new BorderLayout());
         bottomPanel.add(algorithmPanel, BorderLayout.CENTER);
+        bottomPanel.add(chooseFileButton, BorderLayout.WEST); // Adjusted placement of "Choose File" button
         bottomPanel.add(buttonPanel, BorderLayout.EAST); // Adjusted placement of compress button
 
         JPanel containerPanel = new JPanel(new BorderLayout());

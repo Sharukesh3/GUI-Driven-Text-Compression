@@ -23,6 +23,9 @@ public class compression {
     private void HuffmanEncoding(String content){
         Huffman huffman = new Huffman(content);
         compressed = huffman.encode();
+        System.out.println("\nTree visualisation");
+        python python = new python(content);
+        python.Huffman_tree_visualisation();
     }
 
     private void LZ77Encoding(String content){
