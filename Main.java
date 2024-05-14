@@ -13,6 +13,11 @@ public class Main {
         String originalText = huffman.decode(encodedText);
         System.out.println("\nThe decoded text: ");
         System.out.println(originalText);
+
+        System.out.println("Tree visualisation");
+        python python = new python();
+        python.Huffman_tree_visualisation();
+        
         CompressionRatio ratio = new CompressionRatio(8*originalText.length(),encodedText.length());
         Double R=ratio.calculateRatio();
         System.out.println("\nThe compression ratio: ");

@@ -64,7 +64,7 @@ def visualize_huffman_tree(root):
     plt.show()
 
 def main():
-    text = input("Enter the text to encode: ")
+    text = "dskjfdsjkfhjdskfkjdsfkjsdfkjh"
     root = build_huffman_tree(text)
     codes = generate_huffman_codes(root)
     print("Huffman Codes:")
