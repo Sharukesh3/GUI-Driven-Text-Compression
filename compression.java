@@ -4,6 +4,7 @@ import java.util.List;
 public class compression {
     private String compressed;
     private List<Triple> compressedLZ77;
+    private List<Integer> compressedLZW;
 
     public compression(String algorithm, String content){
         if (algorithm == "Huffman"){
@@ -34,7 +35,8 @@ public class compression {
     }
 
     private void LZWEncoding(String content){
-        compressed = "Yet to be implemented";
+        LZW LZW = new LZW(content);
+        compressedLZW = LZW.getCompressed();
     }
 
     public String getCompressed() {
@@ -43,6 +45,10 @@ public class compression {
 
     public List<Triple> getCompressedLZ77() {
         return compressedLZ77;
+    }
+
+    public List<Integer> getCompressedLZW() {
+        return compressedLZW;
     }
 
 }

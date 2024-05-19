@@ -126,13 +126,17 @@ public class FileChooserExample extends JFrame {
 
         JOptionPane.showMessageDialog(null, "Compressing file using " + algorithm);
         compression compresser = new compression(algorithm, inputTextArea.getText());
-        if (algorithm.equals("Huffman") || algorithm.equals("LZW")){
+        if (algorithm.equals("Huffman")){
             compressedContent = compresser.getCompressed();
             outputTextArea.setText(compresser.getCompressed());
         }
         else if (algorithm.equals("LZ77")){
             compressedContent = compresser.getCompressedLZ77().toString();
             outputTextArea.setText(compresser.getCompressedLZ77().toString());
+        }
+        else if (algorithm.equals("LZW")){
+            compressedContent = compresser.getCompressedLZW().toString();
+            outputTextArea.setText(compresser.getCompressedLZW().toString());
         }
         else {
             JOptionPane.showMessageDialog(null, "Invalid compression algorithm.");

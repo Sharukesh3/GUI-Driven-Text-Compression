@@ -32,5 +32,14 @@ public class Main {
         System.out.println(LZ77.getcompressedData());
         System.out.println("\nThe decoded text: ");
         System.out.println(LZ77.getdecodedData());
+
+        System.out.println("\nLZW encoding:");
+        LZW LZW = new LZW(inpString);
+        System.out.println("\nThe encoded text is :");
+        System.out.println(LZW.getCompressed());
+        System.out.println("\nThe decoded text: ");
+        System.out.println(LZW.getDecompressed());
+
+
     }
 }
