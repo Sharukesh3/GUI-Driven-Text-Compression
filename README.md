@@ -39,3 +39,64 @@ To run the Python scripts, ensure you have the required dependencies listed in `
 
 ```bash
 pip install -r Requirments.txt
+```
+
+## How to Run
+
+Follow these steps to run the application:
+
+1. **Clone the Repository:**
+   
+   ```bash
+   git clone [your-repo-link]
+   ```
+
+2. **Navigate to the Project Directory:**
+
+   ```bash
+   cd [project-directory]
+   ```
+
+3. **Compile the Java Files:**
+   
+   ```bash
+   javac *.java
+
+   ```
+
+4. **Run the Main Java Application:**
+   
+   ```bash
+   java Main
+   ```
+
+
+## Contributing
+
+We welcome contributions from the community to improve this project. To contribute, follow these steps:
+
+1. Fork the repository.
+2. Create a new branch (git checkout -b feature/improvement).
+3. Make your changes and commit them (git commit -am 'Add new feature').
+4. Push to the branch (git push origin feature/improvement).
+5. Create a new Pull Request.
+
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+
+## Acknowledgments
+Thank you for utilizing the GUI-Driven Text Compression project! We trust that it will enrich your experience in exploring text compression techniques and applications.
+
+
+## Contact
+For any inquiries or feedback, feel free to contact us:
+
+- [sharukesh@gmail.com](mailto:sharukesh@gmail.com)
+- [shayanathif13@gmail.com](mailto:shayanathif13@gmail.com)
+- [rdeva6046@gmail.com](mailto:rdeva6046@gmail.com)
+- [p8001479@gmail.com](mailto:p8001479@gmail.com)
+
+---
+
+
