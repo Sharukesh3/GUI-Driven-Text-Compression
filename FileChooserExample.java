@@ -100,21 +100,30 @@ public class FileChooserExample extends JFrame {
         outputPanel.add(new JScrollPane(outputTextArea), BorderLayout.CENTER);
         outputPanel.setBorder(BorderFactory.createTitledBorder("Output"));
 
-        JPanel algorithmPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        algorithmPanel.add(algorithmComboBox);
+        // Create bottom panel and sub-panels
+        JPanel bottomPanel = new JPanel(new BorderLayout());
 
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        buttonPanel.add(compressButton);
-        buttonPanel.add(decompressButton);
+        // Create left panel for "Choose File" button
+        JPanel leftPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        leftPanel.add(chooseFileButton);
+
+        // Create center panel for algorithm combo box
+        JPanel centerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        centerPanel.add(algorithmComboBox);
+
+        // Create right panel for "Compress" and "Decompress" buttons
+        JPanel rightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        rightPanel.add(compressButton);
+        rightPanel.add(decompressButton);
+
+        // Add sub-panels to bottom panel
+        bottomPanel.add(leftPanel, BorderLayout.WEST);
+        bottomPanel.add(centerPanel, BorderLayout.CENTER);
+        bottomPanel.add(rightPanel, BorderLayout.EAST);
 
         JPanel mainPanel = new JPanel(new GridLayout(1, 2)); // Split into two columns
         mainPanel.add(inputPanel);
         mainPanel.add(outputPanel);
-
-        JPanel bottomPanel = new JPanel(new BorderLayout());
-        bottomPanel.add(algorithmPanel, BorderLayout.CENTER);
-        bottomPanel.add(chooseFileButton, BorderLayout.WEST); // Adjusted placement of "Choose File" button
-        bottomPanel.add(buttonPanel, BorderLayout.EAST); // Adjusted placement of compress and decompress buttons
 
         JPanel containerPanel = new JPanel(new BorderLayout());
         containerPanel.add(topPanel, BorderLayout.NORTH);
